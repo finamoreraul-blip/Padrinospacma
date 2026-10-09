@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Padrinos PACMA - Tres Arroyos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+<style>:root{--orange:#FF6B2D;--dark:#1A1A2E;--beige:#FFF8F0;--green:#2ECC71}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:var(--beige);color:var(--dark)}
+header{background:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.logo{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:700}.logo span{color:var(--orange)}
+.btn{padding:12px 20px;border-radius:30px;border:none;font-weight:700;cursor:pointer}.btn-orange{background:var(--orange);color:white}.btn-outline{background:white;border:2px solid var(--dark)}
+.hero{padding:40px 20px;text-align:center;max-width:900px;margin:0 auto}.hero h1{font-family:'Fredoka';font-size:42px;line-height:1.1;margin-bottom:12px}.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:30px 0}.stat{background:white;padding:14px 20px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.05);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;padding:20px;max-width:1200px;margin:0 auto}
+.card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.07);cursor:pointer;transition:.2s}.card:hover{transform:translateY(-4px)}
+.card-img{height:220px;position:relative;background:#eee}.card-img img{width:100%;height:100%;object-fit:cover}.badge{position:absolute;top:12px;left:12px;background:white;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.progress{height:8px;background:#eee;border-radius:10px;margin:12px 16px 0;overflow:hidden}.progress-bar{height:100%;background:var(--green)}.card-body{padding:16px}.tag{font-size:11px;padding:4px 8px;background:#FFF0E8;border-radius:20px;color:var(--orange);font-weight:600;margin-right:4px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:100;padding:20px;overflow-y:auto}.modal.active{display:flex;justify-content:center;align-items:center}
+.modal-content{background:white;border-radius:28px;max-width:900px;width:100%;overflow:hidden;margin:20px auto}
+.carousel{position:relative;height:380px;background:#000;overflow:hidden}.carousel img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity.6s}.carousel img.active{opacity:1}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:20px}
+.carousel-btn.prev{left:12px}.carousel-btn.next{right:12px}.dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px}.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)}.dot.active{background:white}
+.detail-body{padding:24px;display:grid;grid-template-columns:1fr 320px;gap:24px}@media(max-width:800px){.detail-body{grid-template-columns:1fr}.carousel{height:300px}}
+.padrino-box{background:var(--beige);border-radius:20px;padding:20px;position:sticky;top:20px}.form input{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;margin:6px 0}
+</style></head><body>
+<header><div class="logo">🐾 PACMA <span>Padrinos</span></div><button class="btn btn-outline" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">Ver perritos</button></header>
+<section class="hero"><h1>Con $66 por día le das de comer a un rescatado</h1><p>PACMA rescata, cura y refugia perros de la calle en Tres Arroyos. Apadriná por $2.000/mes y recibí fotos y videos suyos.</p><div class="stats"><div class="stat">🐶 <span id="totalDogs">0</span> perritos</div><div class="stat">❤️ <span id="totalPadrinos">0</span> padrinos</div><div class="stat">💰 $1500 PACMA / $500 plataforma</div></div></section>
+<div id="grid" class="grid"></div>
+
+<div id="detailModal" class="modal" onclick="if(event.target==this)closeDetail()"><div class="modal-content"><div class="carousel" id="detailCarousel"></div><div class="detail-body"><div><h2 id="dName" style="font-family:Fredoka;font-size:32px"></h2><p id="dMeta" style="opacity:.6;font-size:13px"></p><div id="dTags" style="margin:8px 0"></div><p id="dHistoria" style="margin:16px 0;line-height:1.6"></p><h4>🩺 Estado de salud</h4><p id="dSalud" style="opacity:.8;margin:6px 0 16px"></p><h4>📦 Qué necesita</h4><p id="dNecesita" style="opacity:.8;margin:6px 0 16px"></p><h4>🐾 Personalidad</h4><p id="dPersonalidad" style="opacity:.8"></p></div><div><div class="padrino-box"><div style="display:flex;justify-content:space-between"><small>Progreso</small><b id="dProgText"></b></div><div class="progress" style="margin:8px 0 16px"><div id="dProgBar" class="progress-bar"></div></div><div style="font-size:32px;font-weight:800">$2.000<small style="font-size:14px">/mes</small></div><p style="font-size:13px;opacity:.7;margin:10px 0">Cancelás cuando quieras. Te llega video mensual por WhatsApp.</p><button class="btn btn-orange" style="width:100%;margin-top:8px" onclick="openPadrinoForm()">Apadrinar a <span id="dNameBtn"></span> 🧡</button></div></div></div></div></div>
+
+<div id="padrinoModal" class="modal" onclick="if(event.target==this)closePadrinoForm()"><div class="modal-content" style="max-width:420px;padding:28px"><h2 style="font-family:Fredoka">Apadrinar a <span id="pNombre"></span></h2><p style="opacity:.7;font-size:14px;margin:8px 0 16px">$2.000/mes - $1.500 para PACMA + $500 plataforma.</p><label style="font-size:12px;font-weight:700">Tu nombre</label><input id="padrinoNombre" placeholder="Ej: Juan Pérez"><label style="font-size:12px;font-weight:700">Tu WhatsApp</label><input id="padrinoTel" placeholder="Ej: 2983 123456" type="tel"><button class="btn btn-orange" style="width:100%;margin-top:12px" onclick="confirmarPadrino()">Confirmar por $2.000/mes</button><button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="closePadrinoForm()">Cancelar</button><p id="sheetStatus" style="font-size:11px;text-align:center;margin-top:12px;opacity:.6"></p></div></div>
+
+<script>
+const GOOGLE_SHEET_URL = "PEGA_ACA_TU_URL_DE_APPS_SCRIPT";
+
+// SOLO 2 PERRITOS DE EJEMPLO - CON CARRUSEL
+let dogs=[
+{
+nombre:'Rocky',
+edad:'2 años',
+raza:'Mestizo mediano - 18kg',
+resumen:'Rescatado de la ruta 3, super guardián y compañero',
+historia:'Rocky fue encontrado atado en la ruta 3, con desnutrición y mucho miedo. Los chicos de PACMA lo llevaron al refugio, hoy ya está recuperado. Es super cariñoso con chicos, le encanta la pelota y busca una familia con patio. No rompe nada, duerme adentro.',
+salud:'Vacunado completo, desparasitado, castrado. Sin enfermedades. Listo para adoptar.',
+necesita:'Alimento premium adulto (15kg por mes), pipeta antipulgas, camita grande',
+personalidad:'Juguetón, guardián, se lleva bien con otros perros y con niños. Leal.',
+actual:6,
+necesario:10,
+estado:'En refugio',
+fotos:[
+'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=800',
+'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=800',
+'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=800'
+]
+},
+{
+nombre:'Luna',
+edad:'8 meses',
+raza:'Caniche mini - 6kg',
+resumen:'Bebé encontrada en una caja en la plaza, dulce total',
+historia:'Luna apareció en una caja en la plaza San Martín, con frío. Es una cachorra de 8 meses que es puro amor. Duerme a upa, necesita aprender a pasear con correa. Ideal para departamento porque es chiquita y no ladra mucho. Busca familia que esté mucho en casa.',
+salud:'Primer vacuna puesta, en tratamiento por otitis leve. Desparasitada.',
+necesita:'Alimento cachorro, vacunas restantes, pipeta chica, juguetes',
+personalidad:'Dulce, dormilona, ideal para niños y gente mayor. Muy pegada.',
+actual:2,
+necesario:8,
+estado:'En tratamiento',
+fotos:[
+'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=800',
+'https://images.unsplash.com/photo-1601758174597-89d832f60dc1?q=80&w=800',
+'https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=800'
+]
+}
+];
+
+let padrinos=JSON.parse(localStorage.getItem('pacma_padrinos')||'[]');
+let currentDog=null,carInterval=null,carIdx=0;
+function saveAll(){localStorage.setItem('pacma_dogs',JSON.stringify(dogs));localStorage.setItem('pacma_padrinos',JSON.stringify(padrinos));renderGrid();}
+function renderGrid(){const g=document.getElementById('grid');g.innerHTML='';dogs.forEach((d,i)=>{const pct=Math.round(d.actual/d.necesario*100);g.innerHTML+=`<div class="card" onclick="openDetail(${i})"><div class="card-img"><img src="${d.fotos[0]}"><div class="badge">${d.estado}</div></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div><div class="card-body"><h3>${d.nombre} - ${d.edad}</h3><p style="opacity:.6;font-size:13px">${d.raza}</p><p style="font-size:13px;opacity:.8;margin:6px 0">${d.resumen}</p><div style="margin:8px 0"><span class="tag">❤️ ${d.actual}/${d.necesario} padrinos</span><span class="tag">🍖 ${d.necesita.split(',')[0]}</span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><b>$2.000/mes</b><span class="btn btn-orange" style="padding:8px 14px;font-size:13px">Apadrinar</span></div></div></div>`;});
+document.getElementById('totalDogs').textContent=dogs.length;document.getElementById('totalPadrinos').textContent=padrinos.length;}
+function openDetail(i){currentDog=i;const d=dogs[i];document.getElementById('dName').textContent=d.nombre;document.getElementById('dNameBtn').textContent=d.nombre;document.getElementById('dMeta').textContent=`${d.edad} • ${d.raza} • ${d.estado}`;document.getElementById('dTags').innerHTML=`<span class="tag">${d.edad}</span> <span class="tag">${d.raza}</span> <span class="tag">${d.estado}</span>`;document.getElementById('dHistoria').textContent=d.historia;document.getElementById('dSalud').textContent=d.salud;document.getElementById('dNecesita').textContent=d.necesita;document.getElementById('dPersonalidad').textContent=d.personalidad;document.getElementById('dProgText').textContent=`${d.actual}/${d.necesario} padrinos`;document.getElementById('dProgBar').style.width=`${pct=d.actual/d.necesario*100}%`;
+const car=document.getElementById('detailCarousel');car.innerHTML='';d.fotos.forEach((f,idx)=>{car.innerHTML+=`<img src="${f}" class="${idx==0?'active':''}"><div class="dots" id="carDots"></div>`;});car.innerHTML=`${d.fotos.map((f,idx)=>`<img src="${f}" class="${idx==0?'active':''}">`).join('')}<button class="carousel-btn prev" onclick="carPrev()">‹</button><button class="carousel-btn next" onclick="carNext()">›</button><div class="dots" id="carDots">${d.fotos.map((_,idx)=>`<div class="dot ${idx==0?'active':''}" onclick="carGo(${idx})"></div>`).join('')}</div>`;
+startCar();document.getElementById('detailModal').classList.add('active');}
+function startCar(){clearInterval(carInterval);carIdx=0;carInterval=setInterval(carNext,3500);}
+function carNext(){const imgs=document.querySelectorAll('#detailCarousel img');const dots=document.querySelectorAll('.dot');if(!imgs.length)return;imgs[carIdx].classList.remove('active');dots[carIdx]?.classList.remove('active');carIdx=(carIdx+1)%imgs.length;imgs[carIdx].classList.add('active');dots[carIdx]?.classList.add('active');}
+function carPrev(){const imgs=document.querySelectorAll('#detailCarousel img');const dots=document.querySelectorAll('.dot');if(!imgs.length)return;imgs[carIdx].classList.remove('active');dots[carIdx]?.classList.remove('active');carIdx=(carIdx-1+imgs.length)%imgs.length;imgs[carIdx].classList.add('active');dots[carIdx]?.classList.add('active');}
+function carGo(i){const imgs=document.querySelectorAll('#detailCarousel img');const dots=document.querySelectorAll('.dot');imgs[carIdx].classList.remove('active');dots[carIdx]?.classList.remove('active');carIdx=i;imgs[carIdx].classList.add('active');dots[carIdx]?.classList.add('active');}
+function closeDetail(){document.getElementById('detailModal').classList.remove('active');clearInterval(carInterval);}
+function openPadrinoForm(){document.getElementById('pNombre').textContent=dogs[currentDog].nombre;document.getElementById('padrinoModal').classList.add('active');}
+function closePadrinoForm(){document.getElementById('padrinoModal').classList.remove('active');}
+function confirmarPadrino(){const nombre=document.getElementById('padrinoNombre').value.trim();const tel=document.getElementById('padrinoTel').value.trim();if(!nombre||!tel){alert('Completá nombre y WhatsApp');return;}const d=dogs[currentDog];const nuevo={id:Date.now(),nombre:nombre,telefono:tel,perro:d.nombre,perroIndex:currentDog,fecha:new Date().toISOString(),monto:2000,paraPacma:1500,paraVos:500,estado:'activo'};padrinos.unshift(nuevo);d.actual=Math.min(d.actual+1,d.necesario+5);saveAll();if(GOOGLE_SHEET_URL.startsWith('http')){fetch(GOOGLE_SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(nuevo)});}closePadrinoForm();closeDetail();alert(`¡Gracias ${nombre}! Ya sos padrino de ${d.nombre} ❤️\nRegistrado con ${tel}\nAhora aparecés en panel.html y en el Sheet`);const msg=encodeURIComponent(`Hola! Soy ${nombre} (${tel}) Quiero ser padrino de ${d.nombre} por $2000/mes 🐾`);window.open(`https://wa.me/5492983000000?text=${msg}`,'_blank');}
+renderGrid();
+</script></body></html>
