@@ -3,134 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Padrinos PACMA</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap" rel="stylesheet">
+<title>Padrinos PACMA Tres Arroyos</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body{font-family:sans-serif;background:#FFF8F0;margin:0}
-header{background:white;padding:16px;display:flex;justify-content:space-between;position:sticky;top:0}
-.btn{padding:12px 20px;border-radius:30px;border:none;font-weight:700;cursor:pointer}
-.btn-orange{background:#FF6B2D;color:white}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:20px;max-width:1000px;margin:0 auto}
-.card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);cursor:pointer}
-.card img{width:100%;height:200px;object-fit:cover}
-.card-body{padding:14px}
-.badge{background:white;padding:4px 8px;border-radius:20px;font-size:11px;position:absolute;top:10px;left:10px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;padding:20px;overflow:auto}
-.modal.active{display:flex;justify-content:center;align-items:center}
-.box{background:white;border-radius:20px;max-width:800px;width:100%;overflow:hidden}
-.carousel{height:300px;background:#000;position:relative;overflow:hidden}
-.carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity.5s}
-.carousel img.active{opacity:1}
-.padrino-box{background:#FFF8F0;padding:16px;border-radius:16px;margin:16px}
-input{width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin:6px 0}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#FFF8F0;color:#1A1A2E}
+header{background:white;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.logo{font-family:'Fredoka';font-size:22px}.logo span{color:#FF6B2D}
+.btn{padding:12px 20px;border-radius:30px;border:none;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn-orange{background:#FF6B2D;color:white}.btn-dark{background:#1A1A2E;color:white}.btn-outline{background:white;border:2px solid #1A1A2E;color:#1A1A2E}
+
+/* TOP CAROUSEL */
+.top-carousel{height:420px;position:relative;background:#000;overflow:hidden}
+.top-carousel.slide{position:absolute;inset:0;opacity:0;transition:opacity.8s}
+.top-carousel.slide.active{opacity:1}
+.top-carousel img{width:100%;height:100%;object-fit:cover}
+.top-carousel.overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 60%)}
+.top-carousel.caption{position:absolute;bottom:20px;left:20px;color:white;z-index:2}
+.top-carousel.caption h2{font-family:Fredoka;font-size:32px}
+.top-btns{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;padding:0 12px;z-index:3;transform:translateY(-50%)}
+.c-btn{background:rgba(255,255,255,.9);border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:22px}
+
+.hero{padding:36px 20px;text-align:center;max-width:900px;margin:0 auto}
+.hero h1{font-family:Fredoka;font-size:38px;line-height:1.1;margin-bottom:12px}
+.hero p{opacity:.7;line-height:1.5;max-width:600px;margin:0 auto 16px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.07);cursor:pointer;transition:.2s}
+.card:hover{transform:translateY(-4px)}
+.card-img{height:240px;position:relative;background:#eee}.card-img img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;top:12px;left:12px;background:white;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.progress{height:8px;background:#eee;border-radius:10px;margin:12px 16px 0;overflow:hidden}.progress-bar{height:100%;background:#2ECC71}
+.card-body{padding:16px}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;padding:16px;overflow-y:auto}
+.modal.active{display:flex;justify-content:center;align-items:flex-start}
+.box{background:white;border-radius:28px;max-width:1000px;width:100%;overflow:hidden;margin:20px auto}
+
+/* DETAIL CAROUSEL */
+.detail-carousel{position:relative;height:480px;background:#000;overflow:hidden}
+.detail-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#111;opacity:0;transition:opacity.5s}
+.detail-carousel img.active{opacity:1}
+.detail-info{padding:28px;display:grid;grid-template-columns:1fr 340px;gap:28px}
+@media(max-width:800px){.detail-info{grid-template-columns:1fr}.detail-carousel{height:380px}.top-carousel{height:320px}}
+.padrino-box{background:#FFF8F0;border-radius:20px;padding:20px;position:sticky;top:20px}
+.tag{font-size:11px;padding:5px 10px;background:#FFF0E8;border-radius:20px;color:#FF6B2D;font-weight:700;margin-right:6px}
+input{width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin:6px 0}
 </style>
 </head>
 <body>
-<header><b>🐾 PACMA Padrinos</b><button class="btn btn-orange" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">Ver perritos</button></header>
-<h1 style="font-family:Fredoka;text-align:center;padding:30px 20px">Con $66 por día le das de comer a un rescatado</h1>
+<header><div class="logo">🐾 PACMA <span>Padrinos</span></div><a href="#grid" class="btn btn-outline" style="padding:8px 14px">Ver perritos</a></header>
+
+<!-- CARRUSEL ARRIBA CON TODOS -->
+<div class="top-carousel" id="topCar"></div>
+
+<section class="hero">
+<h1>Donación a voluntad, todo suma ❤️</h1>
+<p>Cada aporte ayuda a PACMA Tres Arroyos a rescatar, curar y alimentar a los perritos de la calle. Podes donar lo que puedas o apadrinar por $2.000 al mes.</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+<a href="https://link.mercadopago.com.ar/pacma" target="_blank" class="btn btn-orange">Donar a voluntad (Mercado Pago PACMA)</a>
+<a href="#grid" class="btn btn-dark">Apadrinar por $2.000/mes</a>
+</div>
+<p style="font-size:12px;opacity:.5;margin-top:10px">Link directo a MP de PACMA. 100% para ellos.</p>
+<div style="margin-top:20px;background:white;padding:12px 20px;border-radius:16px;display:inline-flex;gap:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)"><span>🐶 2 perritos</span><span>❤️ <span id="countPadrinos">0</span> padrinos</span><span>🍖 $1500 PACMA / $500 plataforma</span></div>
+</section>
+
 <div id="grid" class="grid"></div>
 
-<div id="detail" class="modal" onclick="if(event.target==this)this.classList.remove('active')">
+<!-- MODAL DETALLE -->
+<div id="detail" class="modal" onclick="if(event.target==this)closeDetail()">
 <div class="box">
-<div class="carousel" id="car"></div>
-<div style="padding:20px;display:grid;grid-template-columns:1fr 300px;gap:20px">
+<div class="detail-carousel" id="detCar"></div>
+<div class="detail-info">
 <div>
-<h2 id="dName"></h2>
-<p id="dMeta" style="opacity:.6"></p>
-<p id="dHist" style="margin:14px 0"></p>
-<p><b>Salud:</b> <span id="dSalud"></span></p>
-<p><b>Necesita:</b> <span id="dNec"></span></p>
-<p><b>Personalidad:</b> <span id="dPers"></span></p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px" id="dTags"></div>
+<h2 id="dName" style="font-family:Fredoka;font-size:36px"></h2>
+<p id="dMeta" style="opacity:.6;font-size:14px;margin:6px 0 16px"></p>
+<h3 style="font-family:Fredoka;margin-top:16px">📖 Su historia</h3>
+<p id="dHist" style="line-height:1.6;margin:8px 0 18px"></p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><h4>🩺 Salud</h4><p id="dSalud" style="opacity:.8;font-size:14px;margin-top:6px"></p></div>
+<div><h4>📦 Necesita</h4><p id="dNec" style="opacity:.8;font-size:14px;margin-top:6px"></p></div>
 </div>
-<div><div class="padrino-box"><div id="dProg"></div><h2>$2.000/mes</h2><button class="btn btn-orange" style="width:100%;margin-top:10px" onclick="openForm()">Apadrinar a <span id="dBtn"></span></button></div></div>
+<div style="margin-top:18px"><h4>🐾 Personalidad</h4><p id="dPers" style="opacity:.8;font-size:14px;margin-top:6px"></p></div>
+</div>
+<div>
+<div class="padrino-box">
+<div style="display:flex;justify-content:space-between"><small>Padrinos</small><b id="dProg"></b></div>
+<div class="progress" style="margin:8px 0 16px"><div id="dBar" class="progress-bar" style="width:50%"></div></div>
+<div style="font-size:32px;font-weight:800">$2.000<small style="font-size:14px;font-weight:400">/mes</small></div>
+<p style="font-size:13px;opacity:.7;margin:10px 0">Te mandamos foto y video mensual por WhatsApp. Cancelás cuando quieras.</p>
+<button class="btn btn-orange" style="width:100%" onclick="openForm()">Apadrinar a <span id="dBtn"></span> 🧡</button>
+<a href="https://link.mercadopago.com.ar/pacma" target="_blank" class="btn btn-outline" style="width:100%;margin-top:8px">Donar a voluntad</a>
+</div>
+</div>
 </div>
 </div>
 </div>
 
+<!-- FORM -->
 <div id="formModal" class="modal" onclick="if(event.target==this)this.classList.remove('active')">
-<div class="box" style="max-width:400px;padding:24px">
-<h2>Apadrinar a <span id="fName"></span></h2>
-<input id="pNombre" placeholder="Tu nombre">
-<input id="pTel" placeholder="Tu WhatsApp ej: 2983 123456">
-<button class="btn btn-orange" style="width:100%;margin-top:10px" onclick="confirmar()">Confirmar $2.000/mes</button>
+<div class="box" style="max-width:420px;padding:28px;margin-top:60px">
+<h2 style="font-family:Fredoka">Apadrinar a <span id="fName"></span></h2>
+<p style="font-size:14px;opacity:.7;margin:8px 0 16px">Quedás registrado con tu WhatsApp para recibir videos.</p>
+<input id="pNombre" placeholder="Tu nombre completo">
+<input id="pTel" placeholder="Tu WhatsApp: 2983 123456">
+<button class="btn btn-orange" style="width:100%;margin-top:12px" onclick="confirmar()">Confirmar padrinazgo $2.000</button>
+<button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="document.getElementById('formModal').classList.remove('active')">Cancelar</button>
 </div>
 </div>
 
 <script>
-let dogs = [
+let dogs=[
 {
 nombre:"Rocky",
 edad:"2 años",
-raza:"Mestizo mediano 18kg",
-resumen:"Rescatado ruta 3, super guardián",
-historia:"Rocky fue encontrado atado en ruta 3 con desnutrición. Hoy está recuperado, es cariñoso con chicos y busca patio.",
-salud:"Vacunado, castrado, desparasitado",
-necesita:"Alimento premium, pipeta, camita",
-personalidad:"Juguetón, guardián, se lleva con perros",
+raza:"Mestizo mediano - 18kg",
+resumen:"Rescatado de la ruta 3, guardián y compañero ideal",
+historia:"Rocky fue encontrado atado en la ruta 3, con desnutrición y miedo. PACMA lo rescató y hoy está totalmente recuperado. Es super cariñoso con chicos, ama la pelota y busca patio. Duerme adentro y no rompe nada. Ideal para familia.",
+salud:"Vacunado completo, desparasitado, castrado. Apto para adopción inmediata.",
+necesita:"Alimento premium adulto 15kg/mes, pipeta, camita grande",
+personalidad:"Juguetón, guardián, se lleva bien con perros y niños. Muy leal.",
 actual:6,necesario:10,estado:"En refugio",
 fotos:["https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800","https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800","https://images.unsplash.com/photo-1552053831-71594a27632d?w=800"]
 },
 {
 nombre:"Luna",
 edad:"8 meses",
-raza:"Caniche mini 6kg",
-resumen:"Bebé en caja en plaza, dulce total",
-historia:"Luna apareció en una caja en la plaza San Martín. Es puro amor, duerme a upa, ideal depto.",
-salud:"Primer vacuna, otitis leve",
-necesita:"Alimento cachorro, vacunas, juguetes",
-personalidad:"Dulce, dormilona, ideal niños",
+raza:"Caniche mini - 6kg",
+resumen:"Bebé encontrada en caja en plaza, dulce total",
+historia:"Luna apareció en una caja en la plaza San Martín con mucho frío. Es una cachorra de 8 meses puro amor. Duerme a upa y necesita aprender a pasear con correa. Chiquita, no ladra, ideal para depto y gente que está mucho en casa.",
+salud:"1ra vacuna puesta, otitis leve en tratamiento, desparasitada.",
+necesita:"Alimento cachorro, vacunas restantes, juguetes blandos",
+personalidad:"Dulce, dormilona, pegada, ideal niños y mayores.",
 actual:2,necesario:8,estado:"En tratamiento",
-fotos:["https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800","https://images.unsplash.com/photo-1601758174597-89d832f60dc1?w=800"]
+fotos:["https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800","https://images.unsplash.com/photo-1601758174597-89d832f60dc1?w=800","https://images.unsplash.com/photo-1517849845537-4d257902454a?w=800"]
 }
 ];
+let padrinos=JSON.parse(localStorage.getItem("pacma_padrinos")||"[]");
+let curDog=0, carIdx=0, carInt=null, topIdx=0, topInt=null;
 
-let padrinos = JSON.parse(localStorage.getItem("pacma_padrinos")||"[]");
-let curDog = 0;
-let carIdx = 0;
-let carInt = null;
+// TOP CAROUSEL DE TODOS
+function renderTop(){
+let tc=document.getElementById("topCar");
+let allFotos=[];
+dogs.forEach(d=>{d.fotos.forEach(f=>{allFotos.push({foto:f,nombre:d.nombre,estado:d.estado})})});
+tc.innerHTML=allFotos.map((o,i)=>`<div class="slide ${i==0?'active':''}"><img src="${o.foto}"><div class="overlay"></div><div class="caption"><h2>${o.nombre}</h2><span style="background:white;color:black;padding:4px 10px;border-radius:20px;font-size:12px">${o.estado}</span></div></div>`).join('') + `<div class="top-btns"><button class="c-btn" onclick="topPrev()">‹</button><button class="c-btn" onclick="topNext()">›</button></div>`;
+topInt=setInterval(topNext,4000);
+}
+function topNext(){let s=document.querySelectorAll("#topCar.slide");s[topIdx].classList.remove("active");topIdx=(topIdx+1)%s.length;s[topIdx].classList.add("active");}
+function topPrev(){let s=document.querySelectorAll("#topCar.slide");s[topIdx].classList.remove("active");topIdx=(topIdx-1+s.length)%s.length;s[topIdx].classList.add("active");}
 
-function render(){
-let g=document.getElementById("grid"); g.innerHTML="";
+function renderGrid(){
+let g=document.getElementById("grid");g.innerHTML="";
 dogs.forEach((d,i)=>{
-g.innerHTML+=`<div class="card" onclick="openDetail(${i})"><div style="position:relative"><img src="${d.fotos[0]}"><span class="badge">${d.estado}</span></div><div class="card-body"><h3>${d.nombre} - ${d.edad}</h3><p style="font-size:13px;opacity:.7">${d.raza}</p><p style="font-size:13px">${d.resumen}</p><p style="margin-top:8px">❤️ ${d.actual}/${d.necesario} padrinos - $2.000/mes</p></div></div>`;
+let pct=Math.round(d.actual/d.necesario*100);
+g.innerHTML+=`<div class="card" onclick="openDetail(${i})"><div class="card-img"><img src="${d.fotos[0]}"><span class="badge">${d.estado}</span></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div><div class="card-body"><h3>${d.nombre} - ${d.edad}</h3><p style="opacity:.6;font-size:13px">${d.raza}</p><p style="font-size:14px;margin:8px 0">${d.resumen}</p><div style="margin:6px 0"><span class="tag">❤️ ${d.actual}/${d.necesario}</span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><b>$2.000/mes</b><span class="btn btn-orange" style="padding:8px 16px;font-size:13px">Ver</span></div></div></div>`;
 });
+document.getElementById("countPadrinos").textContent=padrinos.length;
 }
 function openDetail(i){
-curDog=i; let d=dogs[i];
+curDog=i;let d=dogs[i];
 document.getElementById("dName").textContent=d.nombre;
 document.getElementById("dBtn").textContent=d.nombre;
-document.getElementById("dMeta").textContent=d.edad+" - "+d.raza+" - "+d.estado;
+document.getElementById("dMeta").textContent=d.edad+" • "+d.raza+" • "+d.estado;
+document.getElementById("dTags").innerHTML=`<span class="tag">${d.edad}</span><span class="tag">${d.raza}</span><span class="tag">${d.estado}</span>`;
 document.getElementById("dHist").textContent=d.historia;
 document.getElementById("dSalud").textContent=d.salud;
 document.getElementById("dNec").textContent=d.necesita;
 document.getElementById("dPers").textContent=d.personalidad;
-document.getElementById("dProg").textContent=d.actual+"/"+d.necesario+" padrinos";
-let car=document.getElementById("car"); car.innerHTML="";
-d.fotos.forEach((f,idx)=>{car.innerHTML+=`<img src="${f}" class="${idx==0?'active':''}">`;});
-carIdx=0; clearInterval(carInt);
-carInt=setInterval(()=>{let imgs=document.querySelectorAll("#car img");imgs[carIdx].classList.remove("active");carIdx=(carIdx+1)%imgs.length;imgs[carIdx].classList.add("active");},3000);
+document.getElementById("dProg").textContent=d.actual+"/"+d.necesario;
+document.getElementById("dBar").style.width=Math.round(d.actual/d.necesario*100)+"%";
+let car=document.getElementById("detCar");
+car.innerHTML=d.fotos.map((f,idx)=>`<img src="${f}" class="${idx==0?'active':''}">`).join('')+`<div class="top-btns"><button class="c-btn" onclick="detPrev()">‹</button><button class="c-btn" onclick="detNext()">›</button></div>`;
+carIdx=0;clearInterval(carInt);
+carInt=setInterval(detNext,4000);
 document.getElementById("detail").classList.add("active");
 }
-function openForm(){
-document.getElementById("fName").textContent=dogs[curDog].nombre;
-document.getElementById("formModal").classList.add("active");
-}
+function detNext(){let imgs=document.querySelectorAll("#detCar img");if(!imgs.length)return;imgs[carIdx].classList.remove("active");carIdx=(carIdx+1)%imgs.length;imgs[carIdx].classList.add("active");}
+function detPrev(){let imgs=document.querySelectorAll("#detCar img");if(!imgs.length)return;imgs[carIdx].classList.remove("active");carIdx=(carIdx-1+imgs.length)%imgs.length;imgs[carIdx].classList.add("active");}
+function closeDetail(){document.getElementById("detail").classList.remove("active");clearInterval(carInt);}
+function openForm(){document.getElementById("fName").textContent=dogs[curDog].nombre;document.getElementById("formModal").classList.add("active");}
 function confirmar(){
-let nom=document.getElementById("pNombre").value;
-let tel=document.getElementById("pTel").value;
-if(!nom||!tel){alert("Poné nombre y tel");return;}
+let nom=document.getElementById("pNombre").value.trim();
+let tel=document.getElementById("pTel").value.trim();
+if(!nom||!tel){alert("Completá nombre y WhatsApp");return;}
 let d=dogs[curDog];
 let nuevo={id:Date.now(),nombre:nom,telefono:tel,perro:d.nombre,fecha:new Date().toISOString(),monto:2000,paraPacma:1500,paraVos:500,estado:"activo"};
 padrinos.unshift(nuevo);
 localStorage.setItem("pacma_padrinos",JSON.stringify(padrinos));
-localStorage.setItem("pacma_dogs",JSON.stringify(dogs));
 d.actual++;
+localStorage.setItem("pacma_dogs",JSON.stringify(dogs));
 document.getElementById("formModal").classList.remove("active");
-document.getElementById("detail").classList.remove("active");
-alert("¡Gracias "+nom+"! Ya sos padrino de "+d.nombre+" con tel "+tel+" - Ahora aparecés en panel.html");
-render();
+closeDetail();
+alert("¡Gracias "+nom+"! Ya sos padrino de "+d.nombre+" ❤️\nTel: "+tel+" registrado. Aparecés en panel.html");
+renderGrid();
 }
-render();
+renderTop();renderGrid();
 </script>
 </body>
 </html>
