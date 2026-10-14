@@ -3,370 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Padrinos PACMA Tres Arroyos</title>
+<title>CAAN Protectora Necochea - Padrinos $2000</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#FFF8F0;color:#1A1A2E}
-header{background:white;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:30;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.logo{font-family:'Fredoka';font-size:22px}.logo span{color:#FF6B2D}
-.btn{padding:12px 20px;border-radius:30px;border:none;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
-.btn-orange{background:#FF6B2D;color:white}.btn-dark{background:#1A1A2E;color:white}.btn-outline{background:white;border:2px solid #1A1A2E;color:#1A1A2E}.btn-green{background:#2ECC71;color:white}
-.tabs{display:flex;gap:8px;justify-content:flex-start;padding:12px 16px;background:white;position:sticky;top:60px;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.04);overflow-x:auto;white-space:nowrap}
-.tab{padding:10px 16px;border-radius:30px;border:2px solid #eee;background:white;cursor:pointer;font-weight:700;white-space:nowrap;font-size:14px}
-.tab.active{background:#1A1A2E;color:white;border-color:#1A1A2E}
-.top-wrap{position:relative;height:460px;background:#000;overflow:hidden}
-.slide{position:absolute;inset:0;opacity:0;transition:opacity.8s}.slide.active{opacity:1}
-.slide img{width:100%;height:100%;object-fit:cover}.overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.75) 10%, transparent 60%)}
-.caption{position:absolute;bottom:28px;left:28px;color:white;z-index:2}.caption h2{font-family:Fredoka;font-size:42px}
-.top-nav{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;padding:0 16px;z-index:3;transform:translateY(-50%)}
-.c-btn{background:white;border:none;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:22px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
-.dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer}.dot.active{background:white}
-.hero{padding:32px 20px;text-align:center;max-width:800px;margin:0 auto}.hero h1{font-family:Fredoka;font-size:40px;line-height:1.1}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:20px;max-width:1100px;margin:0 auto}
-.card{background:white;border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.07);cursor:pointer;transition:.2s}.card:hover{transform:translateY(-4px)}.card-img{height:240px;position:relative;background:#eee}.card-img img{width:100%;height:100%;object-fit:cover}
-.badge{position:absolute;top:12px;left:12px;background:white;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
-.progress{height:8px;background:#eee;border-radius:10px;margin:12px 16px 0;overflow:hidden}.progress-bar{height:100%;background:#2ECC71}.card-body{padding:16px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;padding:16px;overflow-y:auto}.modal.active{display:flex;justify-content:center;align-items:flex-start}.box{background:white;border-radius:28px;max-width:1000px;width:100%;overflow:hidden;margin:20px auto}
-.detail-carousel{position:relative;height:520px;background:#111;overflow:hidden}.detail-carousel img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity.5s}.detail-carousel img.active{opacity:1}
-.detail-info{padding:28px;display:grid;grid-template-columns:1fr 340px;gap:28px}
-@media(max-width:800px){.detail-info{grid-template-columns:1fr}.top-wrap{height:360px}}
-.padrino-box{background:#FFF8F0;border-radius:20px;padding:20px;position:sticky;top:20px}.tag{font-size:11px;padding:5px 10px;background:#FFF0E8;border-radius:20px;color:#FF6B2D;font-weight:700;margin-right:6px;display:inline-block;margin-bottom:4px}
-input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin:6px 0;font-family:Inter}
-.perdidos-wrap{max-width:1100px;margin:0 auto;padding:20px}
-.post{background:white;border-radius:20px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);margin-bottom:16px;display:grid;grid-template-columns:260px 1fr;position:relative}
-.post-img{height:260px;background:#eee;position:relative}.post-img img{width:100%;height:100%;object-fit:cover}
-.post-body{padding:18px}
-.status-lost{background:#FFE0E0;color:#D00;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}.status-found{background:#E0FFE8;color:#0A7D2E;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.sim-badge{position:absolute;top:10px;left:10px;background:#1A1A2E;color:white;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:800;z-index:2}
-@media(max-width:700px){.post{grid-template-columns:1fr}.post-img{height:320px}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FFF8F0;font-family:Inter;color:#1A1A2E}
+h1,h2,h3{font-family:Fredoka}
+.hero{background:#1A1A2E;color:#fff;padding:28px 20px;text-align:center}
+.hero h1{font-size:36px;color:#FF6B2D}
+.tabs{display:flex;gap:8px;overflow:auto;padding:12px 20px;background:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid #eee}
+.tabs button{white-space:nowrap;padding:10px 18px;border-radius:30px;border:2px solid #1A1A2E;background:#fff;font-family:Fredoka;font-weight:700;cursor:pointer}
+.tabs button.active{background:#1A1A2E;color:#fff}
+.top-wrap{max-width:1100px;margin:0 auto;padding:16px}
+.top-car{position:relative;border-radius:24px;overflow:hidden;background:#000;height:380px}
+.top-car img{width:100%;height:100%;object-fit:cover}
+.top-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;padding:20px}
+.top-dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.top-dots span{width:8px;height:8px;border-radius:50%;background:#ddd;cursor:pointer}
+.top-dots span.on{background:#FF6B2D}
+.grid{max-width:1100px;margin:0 auto;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.07);cursor:pointer}
+.card img{width:100%;height:220px;object-fit:cover}
+.card-body{padding:14px}
+.badge{font-size:11px;padding:4px 8px;border-radius:10px;font-weight:700}
+.b-rojo{background:#FFE2E2;color:#C00}
+.b-verde{background:#D6F8D6;color:#0A7D0A}
+.b-amar{background:#FFF3CD;color:#8A6D00}
+.prog{height:8px;background:#eee;border-radius:10px;overflow:hidden;margin:8px 0}
+.prog i{display:block;height:100%;background:#FF6B2D}
+.btn{padding:10px 18px;border-radius:30px;border:none;font-family:Fredoka;font-weight:700;cursor:pointer}
+.btn-dark{background:#1A1A2E;color:#fff}
+.btn-orange{background:#FF6B2D;color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:30;padding:12px}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:24px;max-width:720px;width:100%;max-height:90vh;overflow:auto}
+.modal-box img{width:100%;height:360px;object-fit:cover}
+.modal-pad{padding:18px}
+.car-ctrl{display:flex;justify-content:space-between;margin-top:-40px;position:relative;z-index:2;padding:0 10px}
+.banner{background:#E8F4FF;border:2px dashed #5AA9E6;border-radius:20px;padding:18px;margin:20px auto;max-width:1100px;text-align:center}
+.input{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:12px;margin:6px 0;font-family:Inter}
 </style>
 </head>
 <body>
-<header><div class="logo">🐾 PACMA <span>Padrinos</span></div><button class="btn btn-orange" onclick="openPublicar()" style="padding:8px 14px">+ Publicar perdida</button></header>
-
-<div class="top-wrap" id="topWrap"></div>
+<div class="hero">
+<h1>CAAN Protectora Necochea</h1>
+<p>250 perros en 107 y 66 - Única protectora de 100 mil habitantes - Menos de 10 voluntarios - Deuda $2M veterinarias</p>
+<div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+<button class="btn btn-orange" onclick="document.getElementById('padrinos').scrollIntoView()">Apadrinar $2.000</button>
+<button class="btn btn-dark" onclick="openTransitoInfo()">Dar tránsito</button>
+</div>
+</div>
 
 <div class="tabs">
-<button class="tab active" onclick="switchTab('padrinos')" id="tabPadrinos">❤️ Padrinos</button>
-<button class="tab" onclick="switchTab('perdidos')" id="tabPerdidos">🔍 Perdidos</button>
-<button class="tab" onclick="switchTab('encontrados')" id="tabEncontrados">🏠 Encontrados</button>
-<button class="tab" onclick="switchTab('feria')" id="tabFeria">👕 Feria Galpón</button>
+<button class="active" onclick="switchTab('padrinos',this)">🐾 Padrinos</button>
+<button onclick="switchTab('transito',this)">🏠 Tránsito</button>
+<button onclick="switchTab('perdidos',this)">🔍 Perdidos</button>
+<button onclick="switchTab('encontrados',this)">💚 Encontrados</button>
 </div>
 
-<div id="secPadrinos">
-<section class="hero">
-<h1>Donación a voluntad, todo suma ❤️</h1>
-<p style="opacity:.7;margin:12px 0 18px">Ayudá a los rescatados de PACMA Tres Arroyos. Podés donar lo que puedas o apadrinar un perrito por $2.000 al mes.</p>
-<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-<a href="https://link.mercadopago.com.ar/pacma" target="_blank" class="btn btn-orange">Donar a voluntad</a>
-<a href="#grid" class="btn btn-dark">Apadrinar por $2.000/mes</a>
+<div class="top-wrap">
+<div class="top-car" id="topCar"></div>
+<div class="top-dots" id="topDots"></div>
 </div>
-<div style="margin-top:18px;background:white;padding:10px 18px;border-radius:14px;display:inline-flex;gap:14px;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,.05)">🐶 2 perritos ❤️ <span id="countPadrinos">0</span> padrinos</div>
+
+<section id="padrinos" class="sec">
+<div class="grid" id="grid"></div>
 </section>
-<div id="grid" class="grid"></div>
-</div>
 
-<div id="secPerdidos" style="display:none">
-<div class="perdidos-wrap">
-<div style="background:white;padding:18px;border-radius:18px;margin-bottom:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.05)">
-<div><b style="font-family:Fredoka;font-size:18px">¿Se te perdió? Buscá por foto 📸</b><p style="font-size:13px;opacity:.7">Subí foto de tu mascota y la IA busca parecidos entre los encontrados</p></div>
-<div style="display:flex;gap:8px;align-items:center"><input type="file" id="searchFoto" accept="image/*" style="display:none" onchange="buscarPorFoto(this)"><button class="btn btn-dark" onclick="document.getElementById('searchFoto').click()">📸 Buscar por foto</button><div id="searchPreview" style="display:none"><img id="searchImg" style="width:60px;height:60px;object-fit:cover;border-radius:12px;border:2px solid #1A1A2E"></div></div>
-<span id="searchStatus" style="font-size:13px;opacity:.7;width:100%">Cargando IA...</span>
+<section id="transito" class="sec" style="display:none">
+<div class="banner">
+<h3>🏠 ¿Qué es dar tránsito?</h3>
+<p>No podés adoptar para siempre pero podés cuidar un perro 15-60 días. CAAN te da alimento y veterinaria. Vos das un lugar calentito. Libera lugar en el refugio.</p>
+<button class="btn btn-dark" onclick="openTransitoForm()">Ofrecerme como tránsito</button>
 </div>
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px"><h2 style="font-family:Fredoka;font-size:32px">🔍 Mascotas perdidas en Tres Arroyos</h2><button class="btn btn-orange" onclick="openPublicar()">+ Publicar mi mascota perdida</button></div>
-<div id="listaPerdidos"></div>
+<div class="grid" id="gridTransito"></div>
+</section>
+<section id="perdidos" class="sec" style="display:none">
+<div style="max-width:1100px;margin:0 auto;padding:20px">
+<h2>Perdidos Necochea</h2>
+<div style="display:flex;gap:10px;margin:12px 0;flex-wrap:wrap">
+<input type="file" id="fotoBusq" accept="image/*" class="input" style="max-width:320px" onchange="buscarPorFoto(event)">
+<button class="btn btn-dark" onclick="openPublicar('perdido')">Publicar perdido</button>
 </div>
+<div id="fotoPrev"></div>
+<div class="grid" id="gridPerdidos" style="padding:0"></div>
 </div>
+</section>
 
-<div id="secEncontrados" style="display:none">
-<div class="perdidos-wrap">
-<h2 style="font-family:Fredoka;font-size:32px;margin-bottom:16px">🏠 Encontradas - ¿Conocés a su familia?</h2>
-<div id="listaEncontrados"></div>
+<section id="encontrados" class="sec" style="display:none">
+<div style="max-width:1100px;margin:0 auto;padding:20px">
+<h2>Encontrados</h2>
+<button class="btn btn-dark" onclick="openPublicar('encontrado')" style="margin:12px 0">Publicar encontrado</button>
+<div class="grid" id="gridEncontrados" style="padding:0"></div>
 </div>
-</div>
+</section>
 
-<div id="secFeria" style="display:none">
-<div class="perdidos-wrap">
-<div style="background:#1A1A2E;color:white;padding:28px;border-radius:24px;margin-bottom:20px;display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:center">
-<div>
-<h2 style="font-family:Fredoka;font-size:36px;line-height:1.1">👕 Feria Solidaria PACMA<br>del Galpón</h2>
-<p style="opacity:.8;margin:12px 0;line-height:1.5">Doná lo que no usás y PACMA lo vende en la feria del galpón para comprar alimento, vacunas y pagar veterinaria. ¡Todo suma!</p>
-<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px"><span class="tag">👚 Ropa</span><span class="tag">👟 Calzado</span><span class="tag">🛋️ Muebles</span><span class="tag">📺 Electro</span><span class="tag">🍳 Bazar</span><span class="tag">🧸 Juguetes</span></div>
+<!-- MODALES -->
+<div class="modal" id="detailModal" onclick="if(event.target==this)closeDetail()">
+<div class="modal-box">
+<img id="detImg">
+<div class="car-ctrl"><button class="btn btn-dark" onclick="detPrev()">‹</button><button class="btn btn-dark" onclick="detNext()">›</button></div>
+<div class="modal-pad">
+<h2 id="detNombre"></h2>
+<p id="detResumen"></p>
+<div style="margin:10px 0"><span id="detProgText"></span><div class="prog"><i id="detProg"></i></div></div>
+<p id="detHistoria" style="white-space:pre-line"></p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+<button class="btn btn-orange" onclick="openForm()">Apadrinar $2.000</button>
+<button class="btn btn-dark" onclick="openAdopt()">Adoptar</button>
+<button class="btn" style="background:#E8F4FF" onclick="openTransitoFormFromDetail()">Dar tránsito</button>
 </div>
-<div style="background:white;color:#1A1A2E;padding:18px;border-radius:18px">
-<b>📍 Galpón PACMA Tres Arroyos</b>
-<p style="font-size:13px;opacity:.7;margin:8px 0">Feria todos los sábados de 10 a 13hs. Podés llevar directo o pedimos retiro a domicilio.</p>
-<button class="btn btn-orange" style="width:100%;margin-top:8px" onclick="openDonacion()">Donar para la feria 👕</button>
-<button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="switchTab('padrinos')">Donar plata también ❤️</button>
 </div>
-</div>
-
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:20px">
-<div style="background:white;padding:18px;border-radius:16px"><b>👚 Ropa y calzado</b><p style="font-size:13px;opacity:.7;margin-top:6px">Limpia y en buen estado. De adulto y niño.</p></div>
-<div style="background:white;padding:18px;border-radius:16px"><b>🛋️ Muebles y deco</b><p style="font-size:13px;opacity:.7;margin-top:6px">Mesas, sillas, estantes, cuadros, lámparas.</p></div>
-<div style="background:white;padding:18px;border-radius:16px"><b>📺 Electro y bazar</b><p style="font-size:13px;opacity:.7;margin-top:6px">Funcionando o para repuesto. Ollas, vasos, platos.</p></div>
-<div style="background:white;padding:18px;border-radius:16px"><b>🧸 Juguetes y libros</b><p style="font-size:13px;opacity:.7;margin-top:6px">Completos. Para la mesa de niños.</p></div>
-</div>
-
-<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px">
-<h3 style="font-family:Fredoka;font-size:24px">Últimas donaciones para la feria</h3>
-<button class="btn btn-dark" onclick="openDonacion()" style="padding:8px 14px">+ Donar algo</button>
-</div>
-<div id="listaDonaciones" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px"></div>
 </div>
 </div>
 
-<div id="detail" class="modal" onclick="if(event.target==this)closeDetail()"><div class="box"><div class="detail-carousel" id="detCar"></div><div class="detail-info"><div><div id="dTags" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div><h2 id="dName" style="font-family:Fredoka;font-size:36px"></h2><p id="dMeta" style="opacity:.6;font-size:14px;margin:6px 0 16px"></p><h3 style="font-family:Fredoka">📖 Historia</h3><p id="dHist" style="line-height:1.6;margin:8px 0 18px"></p><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div><h4>🩺 Salud</h4><p id="dSalud" style="font-size:14px"></p></div><div><h4>📦 Necesita</h4><p id="dNec" style="font-size:14px"></p></div></div><div style="margin-top:18px"><h4>🐾 Personalidad</h4><p id="dPers" style="font-size:14px"></p></div></div><div><div class="padrino-box"><div style="display:flex;justify-content:space-between"><small>Padrinos</small><b id="dProg"></b></div><div class="progress" style="margin:8px 0 16px"><div id="dBar" class="progress-bar"></div></div><div style="font-size:32px;font-weight:800">$2.000<small style="font-size:14px">/mes</small></div><p style="font-size:13px;opacity:.7;margin:10px 0">Video mensual por WhatsApp. Cancelás cuando quieras.</p><button class="btn btn-orange" style="width:100%" onclick="openForm()">Apadrinar a <span id="dBtn"></span> 🧡</button><button class="btn btn-green" style="width:100%;margin-top:10px" onclick="openAdopt()">🐾 Adoptar a <span class="dBtnAdopt"></span></button><p style="font-size:11px;opacity:.6;margin-top:8px;text-align:center">💚 Si ya sos padrino de <span class="dBtnAdopt"></span> tenés prioridad para adoptar. Lo cuidamos juntos hasta que lo conozcas.</p></div></div></div></div></div>
+<div class="modal" id="formModal"><div class="modal-box"><div class="modal-pad">
+<h2>Apadrinar <span id="formNombre"></span> $2.000/mes</h2>
+<input id="fNombre" class="input" placeholder="Tu nombre">
+<input id="fWsp" class="input" placeholder="WhatsApp">
+<button class="btn btn-orange" onclick="confirmarPadrino()">Confirmar</button>
+<button class="btn" onclick="closeForm()">Cerrar</button>
+</div></div></div>
 
-<div id="formModal" class="modal" onclick="if(event.target==this)this.classList.remove('active')"><div class="box" style="max-width:420px;padding:28px;margin-top:60px"><h2 style="font-family:Fredoka">Apadrinar a <span id="fName"></span></h2><input id="pNombre" placeholder="Tu nombre completo"><input id="pTel" placeholder="Tu WhatsApp 2983..."><button class="btn btn-orange" style="width:100%;margin-top:12px" onclick="confirmar()">Confirmar $2.000/mes</button></div></div>
+<div class="modal" id="adoptModal"><div class="modal-box"><div class="modal-pad">
+<h2>Adoptar <span id="adoptNombre"></span></h2>
+<p>Los padrinos tienen prioridad.</p>
+<input id="aNombre" class="input" placeholder="Nombre">
+<input id="aWsp" class="input" placeholder="WhatsApp">
+<textarea id="aMotivo" class="input" placeholder="Motivo, patio"></textarea>
+<button class="btn btn-dark" onclick="confirmarAdopcion()">Enviar</button>
+<button class="btn" onclick="closeAdopt()">Cerrar</button>
+</div></div></div>
 
-<div id="adoptModal" class="modal" onclick="if(event.target==this)this.classList.remove('active')"><div class="box" style="max-width:420px;padding:28px;margin-top:40px"><h2 style="font-family:Fredoka">Adoptar a <span class="dBtnAdopt"></span> 💚</h2><p style="font-size:13px;opacity:.7;margin:8px 0 14px">Si ya sos padrino, poné el mismo WhatsApp y tenés prioridad. PACMA te contacta en 24hs para coordinar visita.</p><input id="aNombre" placeholder="Tu nombre completo"><input id="aTel" placeholder="Tu WhatsApp 2983..."><textarea id="aCasa" rows="3" placeholder="Contanos: ¿Tenés patio? ¿Otros animales? ¿Casa o depto?"></textarea><button class="btn btn-green" style="width:100%;margin-top:12px" onclick="confirmarAdopcion()">Quiero adoptar 💚</button><button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="document.getElementById('adoptModal').classList.remove('active')">Cancelar</button></div></div>
+<div class="modal" id="pubModal"><div class="modal-box"><div class="modal-pad">
+<h2 id="pubTitulo">Publicar</h2>
+<input id="pNombre" class="input" placeholder="Descripción">
+<input id="pZona" class="input" placeholder="Zona Necochea">
+<input id="pWsp" class="input" placeholder="WhatsApp">
+<input type="file" id="pFoto" accept="image/*" class="input" onchange="previewPub(event)">
+<div id="pFotoPrev"></div>
+<button class="btn btn-orange" onclick="guardarPublicacion()">Publicar</button>
+<button class="btn" onclick="closePublicar()">Cerrar</button>
+</div></div></div>
 
-<div id="pubModal" class="modal" onclick="if(event.target==this)this.classList.remove('active')"><div class="box" style="max-width:520px;padding:28px;margin-top:20px"><h2 style="font-family:Fredoka">Publicar mascota perdida / encontrada</h2><p style="font-size:13px;opacity:.7;margin:8px 0 14px">Se publica al toque. Queda guardado para Google Sheet y panel.html</p><select id="pubTipo"><option value="perdido">🔍 Perdido - Se perdió mi mascota</option><option value="encontrado">🏠 Encontrado - Encontré una mascota</option></select><input id="pubNombre" placeholder="Nombre ej: Toby"><input id="pubBarrio" placeholder="Barrio / Zona ej: Olimpo, cerca plaza"><input id="pubFecha" type="date"><textarea id="pubDesc" rows="3" placeholder="Descripción: color, collar, si es miedoso, etc"></textarea><input id="pubTel" placeholder="Tu WhatsApp 2983 123456"><label style="font-size:13px;font-weight:700;margin-top:8px;display:block">Foto de la mascota (del celu):</label><input type="file" id="pubFotoFile" accept="image/*"><img id="pubPreview" style="width:100%;height:220px;object-fit:cover;border-radius:14px;display:none;margin-top:8px"><input id="pubFoto" type="hidden"><button class="btn btn-orange" style="width:100%;margin-top:14px" onclick="guardarPublicacion()">Publicar ahora</button><button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="document.getElementById('pubModal').classList.remove('active')">Cancelar</button></div></div>
-
-<div id="donModal" class="modal" onclick="if(event.target==this)this.classList.remove('active')"><div class="box" style="max-width:500px;padding:28px;margin-top:20px"><h2 style="font-family:Fredoka">Donar para la feria del galpón 👕</h2><p style="font-size:13px;opacity:.7;margin:8px 0 14px">Coordinamos retiro a domicilio en Tres Arroyos o lo llevás al galpón el sábado de 10 a 13hs.</p><select id="donTipo"><option>Ropa / Calzado</option><option>Muebles</option><option>Electrodoméstico</option><option>Bazar / Cocina</option><option>Juguetes / Libros</option><option>Otro</option></select><input id="donQue" placeholder="Qué donás? ej: 2 bolsas de ropa de mujer, mesa de luz"><textarea id="donDetalle" rows="2" placeholder="Estado: ej: buena, lavar, funciona, etc"></textarea><input id="donDir" placeholder="Dirección para retiro (opcional) ej: Av Moreno 1234"><input id="donTel" placeholder="Tu WhatsApp 2983..."><label style="font-size:13px;font-weight:700;margin-top:8px;display:block">Foto (opcional):</label><input type="file" id="donFotoFile" accept="image/*"><img id="donPreview" style="width:100%;height:180px;object-fit:cover;border-radius:12px;display:none;margin-top:8px"><input id="donFoto" type="hidden"><button class="btn btn-orange" style="width:100%;margin-top:14px" onclick="guardarDonacion()">Donar para la feria</button><button class="btn btn-outline" style="width:100%;margin-top:8px" onclick="document.getElementById('donModal').classList.remove('active')">Cancelar</button></div></div>
-
+<div class="modal" id="transitoModal"><div class="modal-box"><div class="modal-pad">
+<h2>Ser tránsito</h2>
+<input id="tNombre" class="input" placeholder="Nombre">
+<input id="tWsp" class="input" placeholder="WhatsApp">
+<select id="tTiempo" class="input"><option>15 días</option><option>30 días</option><option>60 días</option><option>Hasta adopción</option></select>
+<textarea id="tObs" class="input" placeholder="Patio cerrado? Otros animales? Zona?"></textarea>
+<button class="btn btn-dark" onclick="confirmarTransito()">Enviar a CAAN 2262 595429</button>
+<button class="btn" onclick="closeTransito()">Cerrar</button>
+</div></div></div>
 <script>
 let dogs=[
-{nombre:"Rocky",edad:"2 años",raza:"Mestizo mediano 18kg",resumen:"Rescatado ruta 3, guardián ideal",historia:"Encontrado atado en ruta 3 con desnutrición. Hoy recuperado, cariñoso con chicos, ama la pelota y busca patio.",salud:"Vacunado completo, desparasitado, castrado.",necesita:"Alimento premium adulto 15kg/mes, pipeta, camita grande",personalidad:"Juguetón, guardián, se lleva bien con perros y niños. Muy leal.",actual:6,necesario:10,estado:"En refugio",fotos:["https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800","https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=800","https://images.unsplash.com/photo-1552053831-71594a27632d?w=800"]},
-{nombre:"Luna",edad:"8 meses",raza:"Caniche mini 6kg",resumen:"Bebé en caja en plaza, dulce total",historia:"Apareció en una caja en la plaza San Martín con mucho frío. Es una cachorra puro amor, duerme a upa, ideal depto.",salud:"1ra vacuna, otitis leve en tratamiento.",necesita:"Alimento cachorro, vacunas restantes",personalidad:"Dulce, dormilona, pegada, ideal niños.",actual:2,necesario:8,estado:"En tratamiento",fotos:["https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800","https://images.unsplash.com/photo-1601758174597-89d832f60dc1?w=800","https://images.unsplash.com/photo-1517849845537-4d257902454a?w=800"]}
+{nombre:"Toto",edad:"2 años",raza:"Mestizo",resumen:"Rescatado playa 87, compañero",historia:"Apareció flaco y con sarna en la playa. Hoy está recuperado y castrado.",salud:"Castrado, vacunas al día",necesita:"Patio cerrado",personalidad:"Juguetón",actual:120000,necesario:180000,estado:"urgente",fotos:["https://images.unsplash.com/photo-1558788353-f76d92427f21","https://images.unsplash.com/photo-1518717758536-85ae29035b6d"],transito:true},
+{nombre:"Luna",edad:"4 años",raza:"Galga",resumen:"Ex galga dulce, necesita tránsito",historia:"Descartada de carreras por lesión. El refugio la estresa mucho.",salud:"Castrada, pata",necesita:"Tránsito",personalidad:"Tranquila",actual:80000,necesario:200000,estado:"transito",fotos:["https://images.unsplash.com/photo-1530281700044-47a5d53de96f"],transito:true},
+{nombre:"Rocco",edad:"1 año",raza:"Pitt",resumen:"Energía pura",historia:"Atado en 66 y 107, rescatado por CAAN.",salud:"Castrado",necesita:"Educación",personalidad:"Enérgico",actual:40000,necesario:150000,estado:"disponible",fotos:["https://images.unsplash.com/photo-1576201836106-db1758fd1c97"],transito:false},
+{nombre:"Mora",edad:"6 meses",raza:"Mestiza",resumen:"Cachorra Quequén",historia:"Camada abandonada en acceso Quequén, quedan hermanitas.",salud:"1ra vacuna",necesita:"Familia",personalidad:"Cachorra",actual:20000,necesario:100000,estado:"disponible",fotos:["https://images.unsplash.com/photo-1583337130417-3346a1be7dee"],transito:true},
+{nombre:"Viejo",edad:"9 años",raza:"Ovejero",resumen:"5 años en CAAN, el más antiguo",historia:"Necesita tránsito para sus últimos años fuera del canil. Muy bueno.",salud:"Artrosis",necesita:"Cucha",personalidad:"Tranquilo",actual:150000,necesario:160000,estado:"urgente",fotos:["https://images.unsplash.com/photo-1517423440428-a5a00ad493e"],transito:true},
+{nombre:"Negra",edad:"3 años",raza:"Mestiza",resumen:"Rescatada maltrato",historia:"Con miedo al inicio, luego muy mimosa.",salud:"Castrada",necesita:"Paciencia",personalidad:"Mimosa",actual:60000,necesario:140000,estado:"disponible",fotos:["https://images.unsplash.com/photo-1601758174490-1e5d9f6a56fd"],transito:true},
+{nombre:"Chispita",edad:"2 años",raza:"Caniche",resumen:"Caniche",historia:"Abandonado por no poder pagar peluquería.",salud:"Sano",necesita:"Pelu",personalidad:"Faldero",actual:90000,necesario:120000,estado:"disponible",fotos:["https://images.unsplash.com/photo-1587300003388-59208cc962cb"],transito:false},
+{nombre:"Thor",edad:"5 años",raza:"Dogo sordo",resumen:"Sordo, señas",historia:"Sordo de nacimiento, aprende por señas. Obediente.",salud:"Castrado",necesita:"Patio",personalidad:"Obediente",actual:30000,necesario:180000,estado:"urgente",fotos:["https://images.unsplash.com/photo-1561037404-61cd46aa615b"],transito:false}
 ];
-let publicaciones=JSON.parse(localStorage.getItem("pacma_perdidos")||"null")||[
-{nombre:"Toby",tipo:"perdido",barrio:"Barrio Villa Italia - cerca de Av Moreno",fecha:"2026-10-07",desc:"Caniche blanco con collar azul, es viejito y sordo, se asusta fácil. Se escapó ayer a la tarde.",tel:"2983 456789",foto:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800",fechaPub:new Date().toISOString(),id:1},
-{nombre:"Micha",tipo:"encontrado",barrio:"Barrio Olimpo - Calle Reina Margarita",fecha:"2026-10-08",desc:"Encontré esta gatita tricolor en el patio, muy cariñosa, parece de casa. La tengo retenida.",tel:"2983 112233",foto:"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800",fechaPub:new Date().toISOString(),id:2}
-];
-let padrinos=JSON.parse(localStorage.getItem("pacma_padrinos")||"[]");
-let donaciones=JSON.parse(localStorage.getItem("pacma_donaciones")||"null")||[
-{tipo:"Ropa / Calzado",que:"3 bolsas de ropa de mujer y niño",detalle:"Buen estado, limpia",dir:"Barrio Fonavi",tel:"2983 555111",foto:"https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800",fecha:new Date().toISOString(),id:1}
-];
-let curDog=0,carIdx=0,carInt=null,topIdx=0,topInt=null;
-const SHEET_URL = "";
-
-function switchTab(t){
-document.getElementById("secPadrinos").style.display=t=="padrinos"?"block":"none";
-document.getElementById("secPerdidos").style.display=t=="perdidos"?"block":"none";
-document.getElementById("secEncontrados").style.display=t=="encontrados"?"block":"none";
-document.getElementById("secFeria").style.display=t=="feria"?"block":"none";
-document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-document.getElementById("tab"+t.charAt(0).toUpperCase()+t.slice(1)).classList.add("active");
-if(t!="padrinos")window.scrollTo({top:460,behavior:"smooth"});
-if(t=="perdidos")renderPerdidos();
-if(t=="encontrados")renderEncontrados();
-if(t=="feria")renderDonaciones();
-}
-function renderTop(){
-let all=[];dogs.forEach(d=>{d.fotos.forEach(f=>{all.push({foto:f,nombre:d.nombre,resumen:d.resumen})})});
-let wrap=document.getElementById("topWrap");
-wrap.innerHTML=all.map((o,i)=>`<div class="slide ${i==0?'active':''}"><img src="${o.foto}"><div class="overlay"></div><div class="caption"><h2>${o.nombre}</h2><p>${o.resumen}</p></div></div>`).join('')+`<div class="top-nav"><button class="c-btn" onclick="topPrev()">‹</button><button class="c-btn" onclick="topNext()">›</button></div><div class="dots" id="topDots">${all.map((_,i)=>`<div class="dot ${i==0?'active':''}" onclick="goTop(${i})"></div>`).join('')}</div>`;
-clearInterval(topInt);topInt=setInterval(topNext,5000);
-}
-function goTop(i){let s=document.querySelectorAll("#topWrap.slide");let d=document.querySelectorAll("#topDots.dot");if(!s.length)return;s[topIdx].classList.remove("active");d[topIdx].classList.remove("active");topIdx=i;s[topIdx].classList.add("active");d[topIdx].classList.add("active");}
-function topNext(){let s=document.querySelectorAll("#topWrap.slide");let d=document.querySelectorAll("#topDots.dot");if(!s.length)return;s[topIdx].classList.remove("active");d[topIdx].classList.remove("active");topIdx=(topIdx+1)%s.length;s[topIdx].classList.add("active");d[topIdx].classList.add("active");}
-function topPrev(){let s=document.querySelectorAll("#topWrap.slide");let d=document.querySelectorAll("#topDots.dot");if(!s.length)return;s[topIdx].classList.remove("active");d[topIdx].classList.remove("active");topIdx=(topIdx-1+s.length)%s.length;s[topIdx].classList.add("active");d[topIdx].classList.add("active");}
-function renderGrid(){
-let g=document.getElementById("grid");g.innerHTML="";
-dogs.forEach((d,i)=>{
-let pct=Math.round(d.actual/d.necesario*100);
-g.innerHTML+=`<div class="card" onclick="openDetail(${i})"><div class="card-img"><img src="${d.fotos[0]}"><span class="badge">${d.estado}</span></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div><div class="card-body"><h3>${d.nombre} - ${d.edad}</h3><p style="opacity:.6;font-size:13px">${d.raza}</p><p style="font-size:14px;margin:8px 0">${d.resumen}</p><span class="tag">❤️ ${d.actual}/${d.necesario}</span><div style="display:flex;justify-content:space-between;margin-top:12px"><b>$2.000/mes</b><span class="btn btn-orange" style="padding:8px 14px;font-size:12px">Ver</span></div></div></div>`;
-});
-document.getElementById("countPadrinos").textContent=padrinos.length;
-}
-function renderPerdidos(){
-let cont=document.getElementById("listaPerdidos");
-let list=publicaciones.filter(p=>p.tipo=="perdido");
-if(!list.length){cont.innerHTML="<p style='opacity:.6;text-align:center;padding:40px'>No hay perdidos por ahora 🙏</p>";return;}
-cont.innerHTML=list.map(p=>`<div class="post"><div class="post-img"><img src="${p.foto}"></div><div class="post-body"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="status-lost">🔍 PERDIDO</span><small style="opacity:.6">${new Date(p.fechaPub).toLocaleDateString('es-AR')}</small></div><h3 style="font-family:Fredoka;font-size:22px">${p.nombre} - ${p.barrio}</h3><p style="font-size:13px;opacity:.6;margin:4px 0">Se perdió: ${p.fecha}</p><p style="margin:12px 0;line-height:1.5">${p.desc}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><a href="https://wa.me/549${p.tel.replace(/\D/g,'')}" target="_blank" class="btn btn-orange" style="padding:10px 16px">📱 WhatsApp ${p.tel}</a><button class="btn btn-outline" style="padding:10px 16px" onclick="compartirPub('${p.nombre}','${p.barrio}')">Compartir</button></div></div></div>`).join('');
-}
-function renderEncontrados(lista=null){
-let cont=document.getElementById("listaEncontrados");
-let list=lista||publicaciones.filter(p=>p.tipo=="encontrado");
-if(!list.length){cont.innerHTML="<p style='opacity:.6;text-align:center;padding:40px'>No hay encontradas por ahora</p>";return;}
-cont.innerHTML=list.map(p=>{
-let simTxt=p.sim?`<span class="sim-badge">${Math.round(p.sim*100)}% parecido</span>`:"";
-return `<div class="post" style="${p.sim>0.8?'border:3px solid #2ECC71':''}"><div class="post-img"><img src="${p.foto}">${simTxt}</div><div class="post-body"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="status-found">🏠 ENCONTRADO ${p.sim?'- '+Math.round(p.sim*100)+'% match':''}</span><small style="opacity:.6">${new Date(p.fechaPub).toLocaleDateString('es-AR')}</small></div><h3 style="font-family:Fredoka;font-size:22px">${p.nombre} - ${p.barrio}</h3><p style="font-size:13px;opacity:.6;margin:4px 0">Encontrado: ${p.fecha}</p><p style="margin:12px 0;line-height:1.5">${p.desc}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><a href="https://wa.me/549${p.tel.replace(/\D/g,'')}" target="_blank" class="btn btn-dark" style="padding:10px 16px">📱 Contactar ${p.tel}</a><button class="btn btn-outline" style="padding:10px 16px" onclick="compartirPub('${p.nombre}','${p.barrio}')">Compartir</button></div></div></div>`;
-}).join('');
-}
-function renderDonaciones(){
-let cont=document.getElementById("listaDonaciones");
-if(!donaciones.length){cont.innerHTML="<p style='opacity:.6'>Sé el primero en donar para la feria 🙏</p>";return;}
-cont.innerHTML=donaciones.map(d=>`<div style="background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.05)"><div style="height:160px;background:#eee"><img src="${d.foto}" style="width:100%;height:100%;object-fit:cover"></div><div style="padding:12px"><span class="tag">${d.tipo}</span><p style="font-weight:700;margin:8px 0">${d.que}</p><p style="font-size:12px;opacity:.6">${d.detalle||""} ${d.dir?' - Retiro: '+d.dir:''}</p><p style="font-size:12px;margin-top:6px">📱 ${d.tel}</p><a href="https://wa.me/549${d.tel.replace(/\D/g,'')}" target="_blank" class="btn btn-dark" style="padding:8px 12px;font-size:12px;margin-top:8px;width:100%">Coordinar retiro</a></div></div>`).join('');
-}
-function openDetail(i){
-curDog=i;let d=dogs[i];
-document.getElementById("dName").textContent=d.nombre;
-document.getElementById("dBtn").textContent=d.nombre;
-document.querySelectorAll(".dBtnAdopt").forEach(el=>el.textContent=d.nombre);
-document.getElementById("dMeta").textContent=d.edad+" • "+d.raza+" • "+d.estado;
-document.getElementById("dTags").innerHTML=`<span class="tag">${d.edad}</span><span class="tag">${d.raza}</span><span class="tag">${d.estado}</span>`;
-document.getElementById("dHist").textContent=d.historia;document.getElementById("dSalud").textContent=d.salud;document.getElementById("dNec").textContent=d.necesita;document.getElementById("dPers").textContent=d.personalidad;
-document.getElementById("dProg").textContent=d.actual+"/"+d.necesario;document.getElementById("dBar").style.width=Math.round(d.actual/d.necesario*100)+"%";
-let car=document.getElementById("detCar");car.innerHTML=d.fotos.map((f,idx)=>`<img src="${f}" class="${idx==0?'active':''}">`).join('')+`<div class="top-nav"><button class="c-btn" onclick="detPrev()">‹</button><button class="c-btn" onclick="detNext()">›</button></div>`;
-carIdx=0;clearInterval(carInt);carInt=setInterval(detNext,4000);
-document.getElementById("detail").classList.add("active");
-}
-function detNext(){let imgs=document.querySelectorAll("#detCar img");if(!imgs.length)return;imgs[carIdx].classList.remove("active");carIdx=(carIdx+1)%imgs.length;imgs[carIdx].classList.add("active");}
-function detPrev(){let imgs=document.querySelectorAll("#detCar img");if(!imgs.length)return;imgs[carIdx].classList.remove("active");carIdx=(carIdx-1+imgs.length)%imgs.length;imgs[carIdx].classList.add("active");}
-function closeDetail(){document.getElementById("detail").classList.remove("active");clearInterval(carInt);}
-function openForm(){document.getElementById("fName").textContent=dogs[curDog].nombre;document.getElementById("formModal").classList.add("active");}
-function confirmar(){
-let nom=document.getElementById("pNombre").value.trim();
-let tel=document.getElementById("pTel").value.trim();
-if(!nom||!tel){alert("Completá datos");return;}
-let d=dogs[curDog];
-let nuevo={id:Date.now(),nombre:nom,telefono:tel,perro:d.nombre,fecha:new Date().toISOString(),monto:2000,estado:"activo",tipo:"padrino"};
-padrinos.unshift(nuevo);
-localStorage.setItem("pacma_padrinos",JSON.stringify(padrinos));
-d.actual++;localStorage.setItem("pacma_dogs",JSON.stringify(dogs));
-if(SHEET_URL){fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(nuevo)});}
-document.getElementById("formModal").classList.remove("active");closeDetail();alert("¡Gracias "+nom+"! Sos padrino de "+d.nombre);renderGrid();
-}
-function openAdopt(){
-let nombre=dogs[curDog].nombre;
-document.querySelectorAll(".dBtnAdopt").forEach(el=>el.textContent=nombre);
-document.getElementById("adoptModal").classList.add("active");
-}
-function confirmarAdopcion(){
-let nom=document.getElementById("aNombre").value.trim();
-let tel=document.getElementById("aTel").value.trim();
-let casa=document.getElementById("aCasa").value.trim();
-if(!nom||!tel){alert("Completá nombre y WhatsApp");return;}
-let d=dogs[curDog];
-let esPadrino=padrinos.some(p=>p.telefono==tel && p.perro==d.nombre);
-let nueva={id:Date.now(),nombre:nom,telefono:tel,casa:casa,perro:d.nombre,fecha:new Date().toISOString(),tipo:"adopcion",prioridad:esPadrino?"SI - ES PADRINO":"NO",estado:"pendiente"};
-let adopciones=JSON.parse(localStorage.getItem("pacma_adopciones")||"[]");
-adopciones.unshift(nueva);
-localStorage.setItem("pacma_adopciones",JSON.stringify(adopciones));
-if(SHEET_URL){fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(nueva)});}
-document.getElementById("adoptModal").classList.remove("active");
-closeDetail();
-alert((esPadrino?"💚 ¡Sos padrino! Tenés prioridad. ":"")+"Gracias "+nom+"! Pedido de adopción para "+d.nombre+" enviado.");
-}
-function openPublicar(){document.getElementById("pubModal").classList.add("active");}
-function guardarPublicacion(){
-let tipo=document.getElementById("pubTipo").value;
-let nombre=document.getElementById("pubNombre").value.trim();
-let barrio=document.getElementById("pubBarrio").value.trim();
-let fecha=document.getElementById("pubFecha").value;
-let desc=document.getElementById("pubDesc").value.trim();
-let tel=document.getElementById("pubTel").value.trim();
-let foto=document.getElementById("pubFoto").value.trim();
-if(!foto) foto = tipo=="perdido"? "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800" : "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800";
-if(!nombre||!barrio||!tel){alert("Completá nombre, barrio y WhatsApp");return;}
-let nueva={id:Date.now(),nombre:nombre,tipo:tipo,barrio:barrio,fecha:fecha||new Date().toISOString().split('T')[0],desc:desc||"Sin descripción",tel:tel,foto:foto,fechaPub:new Date().toISOString()};
-publicaciones.unshift(nueva);
-localStorage.setItem("pacma_perdidos",JSON.stringify(publicaciones));
-if(SHEET_URL){fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(nueva)});}
-document.getElementById("pubModal").classList.remove("active");
-alert("¡Publicado! Ya aparece en "+(tipo=="perdido"?"Perdidos":"Encontrados"));
-if(tipo=="perdido")switchTab('perdidos');else switchTab('encontrados');
-}
-function openDonacion(){document.getElementById("donModal").classList.add("active");}
-function guardarDonacion(){
-let tipo=document.getElementById("donTipo").value;
-let que=document.getElementById("donQue").value.trim();
-let detalle=document.getElementById("donDetalle").value.trim();
-let dir=document.getElementById("donDir").value.trim();
-let tel=document.getElementById("donTel").value.trim();
-let foto=document.getElementById("donFoto").value.trim();
-if(!que||!tel){alert("Completá qué donás y WhatsApp");return;}
-let nueva={id:Date.now(),tipo:tipo,que:que,detalle:detalle,dir:dir,tel:tel,foto:foto||"https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800",fecha:new Date().toISOString(),tipo_reg:"donacion_feria"};
-donaciones.unshift(nueva);
-localStorage.setItem("pacma_donaciones",JSON.stringify(donaciones));
-if(SHEET_URL){fetch(SHEET_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(nueva)});}
-document.getElementById("donModal").classList.remove("active");
-alert("¡Gracias! Donación registrada para la feria. PACMA te contacta por WhatsApp "+tel);
-renderDonaciones();
-}
-function compartirPub(nombre,barrio){
-let txt=encodeURIComponent(`🐾 ${nombre} - ${barrio} - Visto en PACMA Tres Arroyos: ${location.href}`);
-window.open(`https://wa.me/?text=${txt}`,'_blank');
-}
-document.getElementById("pubFotoFile").addEventListener("change", function(){
-let file=this.files[0]; if(!file) return;
-let r=new FileReader();
-r.onload=(e)=>{document.getElementById("pubFoto").value=e.target.result; document.getElementById("pubPreview").src=e.target.result; document.getElementById("pubPreview").style.display="block";};
-r.readAsDataURL(file);
-});
-document.getElementById("donFotoFile").addEventListener("change", function(){
-let file=this.files[0]; if(!file) return;
-let r=new FileReader();
-r.onload=(e)=>{document.getElementById("donFoto").value=e.target.result; document.getElementById("donPreview").src=e.target.result; document.getElementById("donPreview").style.display="block";};
-r.readAsDataURL(file);
-});
-let mobilenetModel=null;let embeddings={};
-async function loadModel(){
-try{
-document.getElementById("searchStatus").textContent="Cargando IA (1 vez)...";
-mobilenetModel=await mobilenet.load({version:2, alpha:1.0});
-document.getElementById("searchStatus").textContent="IA lista ✅ Subí foto de tu mascota para buscar parecidos";
-for(let p of publicaciones){if(p.foto && p.foto.startsWith("http")) await getEmbedding(p.foto, p.id);}
-}catch(e){document.getElementById("searchStatus").textContent="IA no cargó, recargá página";}
-}
-async function getEmbedding(imageSrc, id){
-if(embeddings[id]) return embeddings[id];
-return new Promise((resolve)=>{
-let img=new Image(); img.crossOrigin="anonymous"; img.src=imageSrc;
-img.onload=async()=>{
-try{
-let t=tf.browser.fromPixels(img);
-let emb=mobilenetModel.infer(t, true);
-let data=await emb.data();
-embeddings[id]=data;
-tf.dispose([t,emb]);
-resolve(data);
-}catch(e){resolve(null);}
-};
-img.onerror=()=>resolve(null);
-});
-}
-function cosineSimilarity(a,b){
-if(!a||!b) return 0;
-let dot=0, na=0, nb=0;
-for(let i=0;i<a.length;i++){dot+=a[i]*b[i]; na+=a[i]*a[i]; nb+=b[i]*b[i];}
-return dot/(Math.sqrt(na)*Math.sqrt(nb));
-}
-async function buscarPorFoto(input){
-if(!mobilenetModel) await loadModel();
-let file=input.files[0]; if(!file) return;
-let reader=new FileReader();
-reader.onload=async(e)=>{
-let src=e.target.result;
-document.getElementById("searchImg").src=src;
-document.getElementById("searchPreview").style.display="block";
-document.getElementById("searchStatus").textContent="Analizando foto y buscando parecidos...";
-let img=new Image(); img.src=src;
-img.onload=async()=>{
-let t=tf.browser.fromPixels(img);
-let queryEmb=mobilenetModel.infer(t, true);
-let queryData=await queryEmb.data();
-let results=[];
-for(let p of publicaciones.filter(x=>x.tipo=="encontrado")){
-let emb=null;
-if(p.foto.startsWith("data:")){
-let tmpImg=new Image(); tmpImg.src=p.foto;
-await new Promise(r=>tmpImg.onload=r);
-let tt=tf.browser.fromPixels(tmpImg);
-let ee=mobilenetModel.infer(tt,true);
-emb=await ee.data();
-tf.dispose([tt,ee]);
-}else{
-emb=await getEmbedding(p.foto, p.id);
-}
-let sim=cosineSimilarity(queryData, emb);
-results.push({...p, sim:sim||0});
-}
-results.sort((a,b)=>b.sim-a.sim);
-document.getElementById("searchStatus").textContent=`Listo: ${results.length} encontrados ordenados por parecido.`;
-renderEncontrados(results);
-switchTab('encontrados');
-tf.dispose([t][queryEmb]);
-};
-};
-reader.readAsDataURL(file);
-}
-renderTop();renderGrid();renderPerdidos();renderDonaciones();loadModel();
+try{let c=JSON.parse(localStorage.getItem("caan_dogs_custom")||"null");if(c&&c.length){let n=c.map(x=>x.nombre.toLowerCase());dogs=[...c,...dogs.filter(d=>!n.includes(d.nombre.toLowerCase()))];}}catch(e){}
+let curDog=0,carIdx=0,topIdx=0,topInt=null;
+let publicaciones=JSON.parse(localStorage.getItem("caan_pubs")||"[]");
+let transitos=JSON.parse(localStorage.getItem("caan_transitos")||"[]");
+let pubTipo="perdido",pubFotoBase64="";
+function switchTab(id,btn){document.querySelectorAll('.sec').forEach(s=>s.style.display='none');document.getElementById(id).style.display='block';document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function renderTop(){let c=document.getElementById('topCar');let all=[];dogs.forEach(d=>d.fotos.forEach(f=>all.push({f,d})));let item=all[topIdx%all.length];c.innerHTML=`<img src="${item.f}"><div class="top-info"><h3>${item.d.nombre}</h3><p>${item.d.resumen}</p><button class="btn btn-orange" style="margin-top:8px" onclick="openDetail(${dogs.indexOf(item.d)})">Ver</button></div>`;let dots=document.getElementById('topDots');dots.innerHTML=all.map((_,i)=>`<span class="${i==topIdx?'on':''}" onclick="topIdx=${i};renderTop()"></span>`).join('');}
+function startTop(){topInt=setInterval(()=>{topIdx++;renderTop();},4000);}
+function renderGrid(){document.getElementById('grid').innerHTML=dogs.map((d,i)=>{let pct=Math.min(100,Math.round(d.actual/d.necesario*100));let badge=d.estado=='urgente'?'b-rojo':d.estado=='transito'?'b-amar':'b-verde';return `<div class="card" onclick="openDetail(${i})"><img src="${d.fotos[0]}"><div class="card-body"><div style="display:flex;justify-content:space-between"><b>${d.nombre}</b><span class="badge ${badge}">${d.estado.toUpperCase()}</span></div><small>${d.edad} - ${d.raza}</small><p style="font-size:13px;margin:4px 0">${d.resumen}</p><div class="prog"><i style="width:${pct}%"></i></div><small>$${d.actual}/$${d.necesario}</small>${d.transito?'<div style="margin-top:6px;font-size:12px;color:#5AA9E6">🏠 Necesita tránsito</div>':''}</div></div>`;}).join('');}
+function renderTransito(){document.getElementById('gridTransito').innerHTML=dogs.filter(d=>d.transito).map(d=>{let idx=dogs.indexOf(d);return `<div class="card" onclick="openDetail(${idx})"><img src="${d.fotos[0]}"><div class="card-body"><b>${d.nombre}</b><p style="font-size:13px">${d.historia.substring(0,90)}...</p><button class="btn btn-dark" style="margin-top:8px">Dar tránsito</button></div></div>`;}).join('');}
+function renderPerdidos(){let cont=document.getElementById('gridPerdidos');let perd=publicaciones.filter(p=>p.tipo=='perdido');cont.innerHTML=perd.map(p=>`<div class="card"><img src="${p.foto||'https://images.unsplash.com/photo-1558788353-f76d92427f21'}"><div class="card-body"><b>${p.nombre}</b><br><small>${p.zona}</small><br><a href="https://wa.me/${p.wsp}" target="_blank" class="btn btn-dark" style="margin-top:6px">WhatsApp</a></div></div>`).join('')||'<p>Sin perdidos</p>';}
+function renderEncontrados(){let cont=document.getElementById('gridEncontrados');let enc=publicaciones.filter(p=>p.tipo=='encontrado');cont.innerHTML=enc.map(p=>`<div class="card"><img src="${p.foto||'https://images.unsplash.com/photo-1517849845537-4d257902454a'}"><div class="card-body"><b>${p.nombre}</b><br><small>${p.zona}</small><br><a href="https://wa.me/${p.wsp}" target="_blank" class="btn btn-dark" style="margin-top:6px">WhatsApp</a></div></div>`).join('')||'<p>Sin encontrados</p>';}
+function openDetail(i){curDog=i;carIdx=0;let d=dogs[i];document.getElementById('detImg').src=d.fotos[0];document.getElementById('detNombre').innerText=d.nombre;document.getElementById('detResumen').innerText=d.edad+' - '+d.raza+' - '+d.resumen;document.getElementById('detHistoria').innerText=`Historia: ${d.historia}\nSalud: ${d.salud}\nNecesita: ${d.necesita}\nPersonalidad: ${d.personalidad}`;let pct=Math.min(100,Math.round(d.actual/d.necesario*100));document.getElementById('detProg').style.width=pct+'%';document.getElementById('detProgText').innerText=`$${d.actual} de $${d.necesario} (${pct}%)`;document.getElementById('detailModal').classList.add('open');}
+function closeDetail(){document.getElementById('detailModal').classList.remove('open');}
+function detNext(){let d=dogs[curDog];carIdx=(carIdx+1)%d.fotos.length;document.getElementById('detImg').src=d.fotos[carIdx];}
+function detPrev(){let d=dogs[curDog];carIdx=(carIdx-1+d.fotos.length)%d.fotos.length;document.getElementById('detImg').src=d.fotos[carIdx];}
+function openForm(){document.getElementById('formNombre').innerText=dogs[curDog].nombre;document.getElementById('formModal').classList.add('open');}
+function closeForm(){document.getElementById('formModal').classList.remove('open');}
+function confirmarPadrino(){let n=document.getElementById('fNombre').value,w=document.getElementById('fWsp').value;if(!n||!w){alert('Completa');return;}let padrinos=JSON.parse(localStorage.getItem('caan_padrinos')||'[]');padrinos.push({perro:dogs[curDog].nombre,nombre:n,wsp:w,fecha:Date.now()});localStorage.setItem('caan_padrinos',JSON.stringify(padrinos));alert('Gracias! Padrino de '+dogs[curDog].nombre+' $2.000/mes');closeForm();}
+function openAdopt(){document.getElementById('adoptNombre').innerText=dogs[curDog].nombre;document.getElementById('adoptModal').classList.add('open');}
+function closeAdopt(){document.getElementById('adoptModal').classList.remove('open');}
+function confirmarAdopcion(){let n=document.getElementById('aNombre').value,w=document.getElementById('aWsp').value;if(!n||!w){alert('Completa');return;}let adops=JSON.parse(localStorage.getItem('caan_adopciones')||'[]');let esPadrino=(JSON.parse(localStorage.getItem('caan_padrinos')||'[]')).some(p=>p.perro==dogs[curDog].nombre && p.wsp==w);adops.push({perro:dogs[curDog].nombre,nombre:n,wsp:w,prioridad:esPadrino,fecha:Date.now()});localStorage.setItem('caan_adopciones',JSON.stringify(adops));alert('Solicitud enviada '+(esPadrino?'(PRIORIDAD PADRINO)':''));closeAdopt();}
+function openPublicar(t){pubTipo=t;document.getElementById('pubTitulo').innerText=t=='perdido'?'Publicar perdido':'Publicar encontrado';document.getElementById('pubModal').classList.add('open');}
+function closePublicar(){document.getElementById('pubModal').classList.remove('open');}
+function previewPub(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{pubFotoBase64=r.result;document.getElementById('pFotoPrev').innerHTML=`<img src="${pubFotoBase64}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-top:8px">`;};r.readAsDataURL(f);}
+function guardarPublicacion(){let nombre=document.getElementById('pNombre').value,zona=document.getElementById('pZona').value,wsp=document.getElementById('pWsp').value;if(!nombre||!zona||!wsp){alert('Completa');return;}publicaciones.push({tipo:pubTipo,nombre,zona,wsp,foto:pubFotoBase64,fecha:Date.now()});localStorage.setItem('caan_pubs',JSON.stringify(publicaciones));closePublicar();renderPerdidos();renderEncontrados();alert('Publicado');}
+function openTransitoInfo(){document.querySelectorAll('.tabs button')[1].click();document.getElementById('transito').scrollIntoView();}
+function openTransitoForm(){document.getElementById('transitoModal').classList.add('open');}
+function openTransitoFormFromDetail(){closeDetail();openTransitoForm();}
+function closeTransito(){document.getElementById('transitoModal').classList.remove('open');}
+function confirmarTransito(){let n=document.getElementById('tNombre').value,w=document.getElementById('tWsp').value;if(!n||!w){alert('Completa');return;}transitos.push({nombre:n,wsp:w,tiempo:document.getElementById('tTiempo').value,obs:document.getElementById('tObs').value,perro:dogs[curDog]?.nombre||'Cualquiera',fecha:Date.now()});localStorage.setItem('caan_transitos',JSON.stringify(transitos));alert('Gracias! CAAN te contacta. 2262 595429');closeTransito();}
+let model=null;async function loadModel(){try{model=await mobilenet.load();}catch(e){}}loadModel();
+async function getEmb(img){if(!model)return null;let t=tf.browser.fromPixels(img).resizeBilinear([224,224]).expandDims(0).toFloat().div(127.5).sub(1);let emb=model.infer(t,true);let d=await emb.data();t.dispose();emb.dispose();return d;}
+async function buscarPorFoto(e){let file=e.target.files[0];if(!file)return;let img=document.createElement('img');img.src=URL.createObjectURL(file);await new Promise(r=>img.onload=r);document.getElementById('fotoPrev').innerHTML=`<img src="${img.src}" style="width:160px;height:160px;object-fit:cover;border-radius:12px"> <small>Buscando...</small>`;let emb=await getEmb(img);renderPerdidos();renderEncontrados();}
+renderTop();startTop();renderGrid();renderTransito();renderPerdidos();renderEncontrados();
 </script>
+<a href="panel.html" style="position:fixed;bottom:20px;right:20px;background:#1A1A2E;color:white;padding:14px 18px;border-radius:30px;font-family:Fredoka;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:40">⚙️ Panel CAAN</a>
 </body>
-  </html>
+</html>
